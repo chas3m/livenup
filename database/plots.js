@@ -7,14 +7,14 @@ const plotSchema = new mongoose.Schema( {
 
 const Plot = mongoose.model('Plot', plotSchema);
 
-model.exports = {
-  find (user, callback) {
+module.exports = {
+  find(user, callback) {
     Plot.find({user: user}, (err, result) => {
       if(err) throw err;
       callback(result);
     });
   },
-  add (user, name, length, width, callback) {
+  add(user, name, length, width, callback) {
     Plot.save({user: user, name: name, length: length, width: width}, (err) => {
       if(err) throw err;
       callback({
@@ -22,7 +22,7 @@ model.exports = {
       });
     });
   },
-  update (id, properties, callback) {
+  update(id, properties, callback) {
     Plot.findById(id, (err, result) => {
       if(err) throw err;
       if(!result) {
@@ -42,7 +42,7 @@ model.exports = {
       });
     });
   },
-  remove (id, callback) {
+  remove(id, callback) {
     Plot.findOneAndRemove({_id: id}, (err, result) => {
       if(err) throw err;
       callback({
