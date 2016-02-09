@@ -42,7 +42,7 @@ class NavBar extends Component {
         onTitleTouchTap = { () => this.props.push('/') }
         iconElementRight = { <LogInOut /> }
       />
-  );
+    );
   }
 }
 
