@@ -5,6 +5,7 @@ import request from 'supertest';
 import mongoose from 'mongoose';
 import mockgoose from 'mockgoose';
 import app from '../server/index';
+import  { navBarColor } from '../client/components/navbar';
 
 mockgoose(mongoose);
 
@@ -53,5 +54,41 @@ describe('inspirations routes', function() {
         expect(res.payload.data[0]).to.be.an('object');
         done();
       });
+  });
+});
+
+describe('components', () => {
+  it('should create a transparent navbar when on home page', () => {
+    const home = '/';
+    const route = '/';
+    function navBarColor() {
+      if (route === home) {
+        return 'rgba(0, 0, 0, 0)';
+      } else {
+        return 'Colors.green900';
+      }
+    }
+
+    expect(route).to.be.a('string');
+    expect(route).to.equal('/');
+    expect(navBarColor()).to.equal('rgba(0, 0, 0, 0)');
+  });
+});
+
+describe('components', () => {
+  it('should create a green navbar when not on home page', () => {
+    const home = '/';
+    const route = '/inspirations';
+    function navBarColor() {
+      if (route === home) {
+        return 'rgba(0, 0, 0, 0)';
+      } else {
+        return 'Colors.green900';
+      }
+    }
+
+    expect(route).to.be.a('string');
+    expect(route).to.equal('/inspirations');
+    expect(navBarColor()).to.equal('Colors.green900');
   });
 });
