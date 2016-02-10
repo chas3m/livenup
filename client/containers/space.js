@@ -23,6 +23,7 @@ import Login from './login';
 import LogInOut from '../components/logInOut';
 import Plant from '../components/plant';
 import { updateUserSpace } from '../actions/creator_actions.js';
+import { deleteSpace, fetchUserSpaces } from '../actions/spaces_actions.js';
 
 const iconStyles = {
   margin: '24px',
@@ -94,8 +95,6 @@ class Space extends Component {
 
 
   displayEditMode() {
-    console.log("this.props:", this.props);
-    console.log("this.state", this.state);
     let counter = 0;
     return (this.state.inspiration_plants.map((plant) => {
       if(typeof plant === 'object') {
@@ -156,6 +155,11 @@ class Space extends Component {
         return (
           <div style={{color: Colors.green50}}>
             <h4 style={{display: 'inline-block'}}>{this.state.space_name}</h4>
+            <FlatButton style={whiteButtonStyles} label="Delete" onTouchTap={() => {
+                this.props.deleteSpace(this.state.id);
+                setTimeout(this.props.fetchUserSpaces, 500);
+              }
+            } />
             <FlatButton style={whiteButtonStyles} label="Edit" onTouchTap={() => this.setState({editMode: !this.state.editMode})} />
           </div>
 
@@ -214,7 +218,7 @@ class Space extends Component {
 
 
       function mapDispatchToProps(dispatch) {
-        return bindActionCreators({ updateUserSpace }, dispatch);
+        return bindActionCreators({ updateUserSpace, deleteSpace, fetchUserSpaces }, dispatch);
       }
 
       function mapStateToProps(state) {

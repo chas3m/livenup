@@ -4,6 +4,7 @@ const express = require('express');
 const inspire = require('../../database/inspirations');
 const router = express.Router();
 
+//queries the database for inspirations by room category
 router.route('/')
   .get((req, res) => {
     inspire.getRooms(function(data){

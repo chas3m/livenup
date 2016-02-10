@@ -7,6 +7,7 @@ const secret = require('./../utilities');
 const socket = require('./../sockets');
 const router = express.Router();
 
+//staged to connect to users hardware
 router.route('/')
   .get((req, res) => {
 
