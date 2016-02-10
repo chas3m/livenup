@@ -1,3 +1,4 @@
+//images for main view
 export default function () {
   return [
     {title: 'Bedroom', img: '../../assets/images/bedroom.jpg'},

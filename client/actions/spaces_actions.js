@@ -3,7 +3,6 @@ import axios from 'axios';
 export const FETCH_USER_SPACES = "FETCH_USER_SPACES";
 
 export function fetchUserSpaces() {
-  console.log('fetching user spaces');
   var token =  window.localStorage.getItem('token');
   let ax = axios.create({headers: {'token': token}});
   const request = ax.get('/space').catch((response) => {

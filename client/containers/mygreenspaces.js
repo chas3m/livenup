@@ -24,7 +24,7 @@ class MyGreenSpaces extends Component {
       <div className='sixteen column row'>
         <div className='two wide column'></div>
         <h2 className='twelve wide column, space-heading'>
-          Water = life. Once a week.
+          Water your plants once a week.
         </h2>
         <div className='two wide column'></div>
       </div>
@@ -34,7 +34,6 @@ class MyGreenSpaces extends Component {
           <Paper style={{boxShadow: 'none'}}>
 
             {this.props.user_spaces.map((userspace, i) => {
-              console.log(`Userspace: `,userspace,` at ${i}`);
               return <Space key={counter++} fetchedSpace={userspace}/>
             })}
           </Paper>
@@ -48,7 +47,6 @@ class MyGreenSpaces extends Component {
 
 
 function mapStateToProps(state) {
-  console.log('state being mapped in mygreenspace', state);
   return {
     user_spaces: state.userSpaces
   }

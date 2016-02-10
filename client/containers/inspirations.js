@@ -28,7 +28,6 @@ class Inspirations extends Component {
     super(props)
   }
   componentWillMount() {
-    console.log('+++ line 28 inside inspirations.js this.props value => ', this.props);
     if(!this.props.selectedSpace) { return console.error('Selected Space is NULL') };
     this.props.fetchInspirations(this.props.selectedSpace);
   }
@@ -42,7 +41,7 @@ class Inspirations extends Component {
           cols={ 1 }
           rows={ 1 }
           onClick={() => {
-            console.log('++++ containers/inspirations.js this.props.selectInspiration(this.props.inspiration) value => ', this.props.selectInspiration(inspiration));
+            this.props.selectInspiration(inspiration);
             this.props.push('/spacecreator');
           } }
         >
@@ -89,7 +88,6 @@ function mapDispatchToProps (dispatch) {
 }
 
 function mapStateToProps (state) {
-  console.log("in containers/inspirations.js state value => ", state);
   return {
       inspirations: state.inspirations || [],
       selectedSpace: state.selectedSpace || null

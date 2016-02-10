@@ -13,7 +13,6 @@ export default class SpaceCreator extends Component {
   }
 
   handleCreate(spaceToCreate) {
-    console.log('props inside of SpaceCreator', this.props);
     this.props.createSpace(spaceToCreate);
     this.props.push('/mygreenspace');
   }

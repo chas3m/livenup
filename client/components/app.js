@@ -6,8 +6,9 @@ import Footer from './footer';
 
 export default class App extends Component {
 
+//{this.props.children} will render component based on the route in client/routes.js
+
   render() {
-    console.log('this.props.location.pathname in App is ', this.props.location.pathname);
     return (
       <div>
         <NavBar atHome={this.props.location.pathname === '/'} />

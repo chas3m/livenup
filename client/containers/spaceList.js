@@ -6,6 +6,7 @@ import GridTile from 'material-ui/lib/grid-list/grid-tile';
 import { selectSpace } from '../actions/index';
 import routeActions, { push } from 'react-router-redux';
 
+//overrides material-ui default styling for grid title to make it centered in image
 const styles = {
   imagetile: {
     'position': 'relative',
@@ -28,6 +29,7 @@ class SpaceList extends Component {
     super(props);
   }
 
+  //renders the nine images below the jumbotron in the main view
   renderList() {
     return this.props.listOfSpaces.map(space => {
       return (

@@ -9,6 +9,7 @@ import ReduxPromise from 'redux-promise';
 import reducers from './reducers';
 import routes from './routes';
 
+//devToolsExtension adds chrome dev tools to browser
 const reduxRouterMiddleware = syncHistory(hashHistory);
 const createStoreWithMiddleware = compose(applyMiddleware(ReduxPromise, reduxRouterMiddleware), window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore);
 const store = createStoreWithMiddleware(reducers);

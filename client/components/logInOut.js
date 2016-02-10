@@ -10,6 +10,8 @@ import { logoutUser } from '../actions/auth_actions';
 class LogInOut extends Component {
   render() {
     let element = <div></div>;
+
+    //checks whether user is logged in and displays appropriate buttons (e.g., log in and sign up if not logged in)
     if(this.props.token === null) {
       element =
         <ul className="nav-right">
@@ -17,6 +19,7 @@ class LogInOut extends Component {
           <li className="nav-button"><SignupForm /></li>
         </ul>
     }
+
 
   if(this.props.token) {
     element =

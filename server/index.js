@@ -9,7 +9,6 @@ const testFunc = require('./sockets');
 
 
 mongoose.connect('mongodb://chuck:1qaz2wsx3edc4rfv@ds051595.mongolab.com:51595/heroku_d6g9mbk4');
-//console.log(mongoose.connection.readyState);
 
 const app = express();
 const server = http.createServer(app);
@@ -26,7 +25,6 @@ app.use((req, res, next) => {
   next();
 });
 
-console.log('__dirname: ', __dirname);
 
 app.use(express.static(__dirname + '/../client/'));
 app.use('/', routes);

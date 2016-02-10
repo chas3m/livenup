@@ -8,7 +8,6 @@ const salt = bcrypt.genSaltSync(10);
 
 module.exports = {  //add expires to payload, then check against
   login (req, res) {
-        console.log('req.app in users auth: ', req.app);
     let existingUser = new Promise ( (resolve, reject) => {
       let  _email = req.body.user.email;
 

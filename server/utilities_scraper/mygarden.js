@@ -127,7 +127,6 @@ oauthRequestToken(function(isRequestTokenFound){
     oauthAccessToken(function(isAccessTokenFound) {
       var parameters = {};
       apiAjax($.endPointLocation, parameters, 'GET', function(data) {
-        console.log(JSON.stringify(data, null, 2));
         saveText( JSON.stringify(data), "plants.json" );
       });
 

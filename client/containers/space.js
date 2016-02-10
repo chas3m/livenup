@@ -1,7 +1,7 @@
 import React , { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { updateUserSpace } from '../actions/creator_actions.js';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import Card from 'material-ui/lib/card/card';
 import CardActions from 'material-ui/lib/card/card-actions';
@@ -15,24 +15,14 @@ import ListItem from 'material-ui/lib/lists/list-item';
 import Paper from 'material-ui/lib/paper';
 import Divider from 'material-ui/lib/divider';
 import Avatar from 'material-ui/lib/avatar';
-
-import Colors from 'material-ui/lib/styles/colors';
-import Sun from 'material-ui/lib/svg-icons/image/brightness-5';
-import Water from 'material-ui/lib/svg-icons/action/invert-colors';
-import Temp from 'material-ui/lib/svg-icons/social/whatshot';
-import Flower from 'material-ui/lib/svg-icons/maps/local-florist';
-
 import LeftNav from 'material-ui/lib/left-nav';
-// import MenuItem from 'material-ui/lib/menus/menu-item';
+import Colors from 'material-ui/lib/styles/colors';
+import GridList from 'material-ui/lib/grid-list/grid-list';
 
 import Login from './login';
 import LogInOut from '../components/logInOut';
-
-import GridList from 'material-ui/lib/grid-list/grid-list';
-
 import Plant from '../components/plant';
-
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { updateUserSpace } from '../actions/creator_actions.js';
 
 const iconStyles = {
   margin: '24px',
@@ -55,29 +45,29 @@ class Space extends Component {
       this.state = {
         expanded: false,
         editMode: true,
-          image_url: this.props.selectedInspiration.image_url,
-          space_name: this.props.selectedInspiration.category,
-          category: this.props.selectedInspiration.category,
-          light: 'medium',
-          humidityLevel: 'medium',
-          temperature: 'high',
-          space_plants: [],
-        inspiried_plants: this.props.selectedInspiration.plantsArray
+        image_url: this.props.selectedInspiration.image_url,
+        space_name: this.props.selectedInspiration.category,
+        category: this.props.selectedInspiration.category,
+        light: 'medium',
+        humidityLevel: 'medium',
+        temperature: 'high',
+        space_plants: [],
+        inspiration_plants: this.props.selectedInspiration.plantsArray
       };
     }else {
       this.state = {
         expanded:false,
         editMode: false,
-          id: this.props.fetchedSpace._id,
-          image_url: this.props.fetchedSpace.space_image,
-          space_name: this.props.fetchedSpace.space_name,
-          category: this.props.fetchedSpace.category,
-          light: this.props.fetchedSpace.light,
-          humidity: this.props.fetchedSpace.humidity,
-          temperature: this.props.fetchedSpace.temperature,
-          space_plants: this.props.fetchedSpace.space_plants,
-        inspiried_plants: this.props.fetchedSpace.inspiried_plants
-    }
+        id: this.props.fetchedSpace._id,
+        image_url: this.props.fetchedSpace.space_image,
+        space_name: this.props.fetchedSpace.space_name,
+        category: this.props.fetchedSpace.category,
+        light: this.props.fetchedSpace.light,
+        humidity: this.props.fetchedSpace.humidity,
+        temperature: this.props.fetchedSpace.temperature,
+        space_plants: this.props.fetchedSpace.space_plants,
+        inspiration_plants: this.props.fetchedSpace.inspiration_plants
+      }
 
       this.renderPlants = this.renderPlants.bind(this);
       this.getHeaderButton = this.getHeaderButton.bind(this);
@@ -99,14 +89,15 @@ class Space extends Component {
       }
       return  (<Plant key={counter++} plant={plant}/>);
     });
-    console.log('-------listItems',listItems);
     return listItems;
   }
 
 
   displayEditMode() {
+    console.log("this.props:", this.props);
+    console.log("this.state", this.state);
     let counter = 0;
-    return (this.state.inspiried_plants.map((plant) => {
+    return (this.state.inspiration_plants.map((plant) => {
       if(typeof plant === 'object') {
         plant.name = plant.name.charAt(0).toUpperCase() + plant.name.slice(1);
       }
@@ -114,10 +105,9 @@ class Space extends Component {
 
         plant = {name: plant.charAt(0).toUpperCase() + plant.slice(1), thumbnail: ''};
       }
-      console.log('Mapping :', plant);
       return (<ListItem key={counter++} leftAvatar={<Avatar src={plant.thumbnail} />} primaryText={plant.name} onTouchTap={() => {
-          this.setState({space_plants: [plant, ...this.state.space_plants]});
-        }}/>);
+        this.setState({space_plants: [plant, ...this.state.space_plants]});
+      }}/>);
     }));
   }
 
@@ -131,13 +121,12 @@ class Space extends Component {
       humidity: this.state.humidity,
       temperature: this.state.temperature,
       space_plants: this.state.space_plants,
-      inspiried_plants: this.state.inspiried_plants
+      inspiration_plants: this.state.inspiration_plants
     };
 
     if(!this.props.selectedInspiration) {
       return this.props.updateUserSpace(space);
     }
-    console.log('creating space: ',space );
     this.props.create(space);
   }
 
@@ -154,86 +143,85 @@ class Space extends Component {
             this.handleSave();
             this.setState({editMode: !this.state.editMode});
           }} />
-      }else {
-        saveBtn = <FlatButton style={{float: 'left'}} primary={true} label="Save" onTouchTap={() => {
-            this.handleSave();
-            this.setState({editMode: !this.state.editMode});
-          }} />
+        }else {
+          saveBtn = <FlatButton style={{float: 'left'}} primary={true} label="Save" onTouchTap={() => {
+              this.handleSave();
+              this.setState({editMode: !this.state.editMode});
+            }} />
+          }
+        }
+        return saveBtn;
       }
-    }
-    return saveBtn;
-  }
-  getHeaderButton() {
-    return (
-      <div style={{color: Colors.green50}}>
-        <h4 style={{display: 'inline-block'}}>{this.state.space_name}</h4>
-        <FlatButton style={whiteButtonStyles} label="Edit" onTouchTap={() => this.setState({editMode: !this.state.editMode})} />
-      </div>
+      getHeaderButton() {
+        return (
+          <div style={{color: Colors.green50}}>
+            <h4 style={{display: 'inline-block'}}>{this.state.space_name}</h4>
+            <FlatButton style={whiteButtonStyles} label="Edit" onTouchTap={() => this.setState({editMode: !this.state.editMode})} />
+          </div>
 
-    );
-  }
+        );
+      }
 
-  render() {
-    return (
-      <div>
-        <Card
-          style={{border: '2px solid black', boxShadow: 'none'}}>
-          <CardHeader
-            style={{backgroundColor: Colors.green900, border: 'solid black', borderWidth: '0px 0px 2px 0px', color: 'white'}}
-            children={this.getHeaderButton()}>
-          </CardHeader>
-          <CardText
+      render() {
+        return (
+          <div>
+            <Card
+              style={{border: '2px solid black', boxShadow: 'none'}}>
+              <CardHeader
+                style={{backgroundColor: Colors.green900, border: 'solid black', borderWidth: '0px 0px 2px 0px', color: 'white'}}
+                children={this.getHeaderButton()}>
+              </CardHeader>
+              <CardText
 
-            style={{margin: 'auto 0', display: 'flex'}}>
-            <LeftNav
-              styles={{root : { backgroundColor: 'blue'}}}
-              openRight={true}
-              open={this.state.editMode}
-              openRight={true}
-              onRequestChange={() => this.setState({editMode: false})}>
-              <div style={{backgroundColor: Colors.green900}}>{this.props.auth ? this.getSaveButton() : <LogInOut /> }</div>
-              <TextField
-                floatingLabelText="Edit Space Name"
-                value={this.state.space_name}
-                onChange={(e) => {this.setState({space_name: e.target.value})}}/>
-              <List subheader="Add plants to your space">
-                {this.state.editMode ? this.displayEditMode(): null}
-              </List>
-            </LeftNav>
-            <Divider />
-              <div
-                style={{flex: '1', width: '100%', height: '100%'}}>
-                <image
-                  style={{width: '100%'}} src={this.state.image_url}/>
-              </div>
-              <div
-                style={{flex: '2', paddingLeft: '10px'}}>
-                <GridList
-                  style={{width: '100%'}}
-                  cols={3}
-                  padding={10}
-                  cellHeight={150}>
+                style={{margin: 'auto 0', display: 'flex'}}>
+                <LeftNav
+                  styles={{root : { backgroundColor: 'blue'}}}
+                  openRight={true}
+                  open={this.state.editMode}
+                  openRight={true}
+                  onRequestChange={() => this.setState({editMode: false})}>
+                  <div style={{backgroundColor: Colors.green900, border: 'solid black', borderWidth: '0px 0px 2px 0px'}}>{this.props.auth ? this.getSaveButton() : <LogInOut /> }</div>
+                  <TextField
+                    floatingLabelText="Edit Space Name"
+                    value={this.state.space_name}
+                    onChange={(e) => {this.setState({space_name: e.target.value})}}/>
+                  <List subheader="Add plants to your space">
+                    {this.state.editMode ? this.displayEditMode(): null}
+                  </List>
+                </LeftNav>
+                <Divider />
+                <div
+                  style={{flex: '1', width: '100%', height: '100%'}}>
+                  <image
+                    style={{width: '100%'}} src={this.state.image_url}/>
+                </div>
+                <div
+                  style={{flex: '2', paddingLeft: '10px'}}>
+                  <GridList
+                    style={{width: '100%'}}
+                    cols={3}
+                    padding={10}
+                    cellHeight={150}>
                     {this.renderPlants()}
-                </GridList>
-              </div>
-          </CardText>
-        </Card>
-      <div style={{marginBottom: '20px'}}></div>
-    </div>);
-  }
-}
+                  </GridList>
+                </div>
+              </CardText>
+            </Card>
+            <div style={{marginBottom: '20px'}}></div>
+          </div>);
+        }
+      }
 
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ updateUserSpace }, dispatch);
-}
+      function mapDispatchToProps(dispatch) {
+        return bindActionCreators({ updateUserSpace }, dispatch);
+      }
 
-function mapStateToProps(state) {
-  console.log('mapping state to props in space.js', state);
-  return {
-    auth : state.isAuthorized.token || null
-  };
-}
+      function mapStateToProps(state) {
+        return {
+          auth : state.isAuthorized.token || null
+        };
+      }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Space);
+      export default connect(mapStateToProps, mapDispatchToProps)(Space);

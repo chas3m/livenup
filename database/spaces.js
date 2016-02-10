@@ -52,7 +52,6 @@ module.exports = {
       if(!result) {
         callback({message: "Space with " + id + " not found"});
       }
-      console.log('result in database/spaces line 55', result);
       result.space_name = properties[0] || result.space_name;
       result.space_useremail = properties[1] || result.space_useremail;
       result.space_image = properties[2] || result.space_image;

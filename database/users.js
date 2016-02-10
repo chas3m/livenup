@@ -27,7 +27,6 @@ module.exports = {
     });
 
     User.count({email: email}, (err, count) => {
-      console.log('----| count in User.find DBuser: ', count, ' err: ', err);
 
       if(count === 0){
         user.save((err, result) => {

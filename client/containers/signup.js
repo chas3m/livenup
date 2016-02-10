@@ -28,8 +28,8 @@ class SignupForm extends Component {
     this.setState({ password: event.target.value });
   }
 
+  //calls action creator in actions/auth_actions.js
   onFormSubmit(event) {
-    console.log(event);
     event.preventDefault();
     this.props.signupUser(this.state.email, this.state.password);
     this.setState({ email: '', password: '' });
@@ -37,7 +37,6 @@ class SignupForm extends Component {
   }
 
   handleOpen() {
-    console.log('this is', this);
     this.setState({open: true});
   }
 

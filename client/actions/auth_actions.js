@@ -4,6 +4,8 @@ export const SIGNUP_USER = 'SIGNUP_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 
+//signup and login requests generate a promise; thanks to redux-promise middleware, action will only be sent when promise resolves
+
 export function signupUser(email, password) {
   const request = axios.post('/signup', {user: {
     email: email,

@@ -31,17 +31,15 @@ router.route('/')
     let _humidity = req.body.space.humidity;
     let _temperature = req.body.space.temperature;
     let _plants = req.body.space.space_plants;
-    let _inspirired_plants = req.body.space.inspiried_plants;
+    let _inspiration_plants = req.body.space.inspiration_plants;
 
-    space.add([_space_name, _space_useremail, _space_image, _category, _light, _humidity, _temperature, _plants, _inspirired_plants], function(data){
+    space.add([_space_name, _space_useremail, _space_image, _category, _light, _humidity, _temperature, _plants, _inspiration_plants], function(data){
       res.send(data);
     });
   })
   .put(auth.checkUser, (req, res) => {
     let _token = req.headers.token;
     let _decoded = jwt.decode(_token, secret.salt);
-
-    console.log('req.body inside of /spaces.put',req.body);
     let _id = req.body.space.id;
     let _space_name = req.body.space.space_name;
     let _space_useremail = _decoded.email;

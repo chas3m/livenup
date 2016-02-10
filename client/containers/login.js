@@ -28,6 +28,7 @@ class LoginForm extends Component {
     this.setState({ password: event.target.value });
   }
 
+  //calls action creator in actions/auth_actions.js
   onFormSubmit(event) {
     event.preventDefault();
     this.props.loginUser(this.state.email, this.state.password);
@@ -36,7 +37,6 @@ class LoginForm extends Component {
   }
 
   handleOpen() {
-    console.log('this is', this);
     this.setState({open: true});
   }
 
