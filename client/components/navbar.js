@@ -40,8 +40,7 @@ class NavBar extends Component {
         showMenuIconButton = { false }
         title ={<span style={{cursor: 'pointer'}}>LivenUp</span>}
         onTitleTouchTap = { () => this.props.push('/') }
-        iconElementRight = { <LogInOut /> }
-      />
+        iconElementRight = { <LogInOut /> } />
     );
   }
 }

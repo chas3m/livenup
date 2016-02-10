@@ -1,0 +1,28 @@
+{
+    "_id": {
+        "$oid": "56b52c74e4b0762325b1b559"
+    },
+    "inspiration_name": "",
+    "category": "Bedroom",
+    "image_url": "https://s-media-cache-ak0.pinimg.com/564x/6b/a5/ae/6ba5aea86569cadb1a1a9a522fdb60c0.jpg",
+    "plantsArray": [
+        {
+            "name": "white doll's daisy",
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Boltonia_asteroides_NRCS-1.jpg"
+        },
+        {
+            "name": "silver sagebrush",
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Artemisia_tridentata_2.jpg"
+        }
+    ],
+    "searchFilter": {
+        "category": "Dicot, Monocot, Fern",
+        "flower_color": "Green, White",
+        "foliage_color": "Green, Dark Green, Gray-Green",
+        "lifespan": "Long",
+        "toxicity": "None",
+        "drought_tolerance": "High",
+        "moisture_use": "Medium, Low",
+        "shade_tolerance": "Tolerant, Intermediate"
+    }
+}
