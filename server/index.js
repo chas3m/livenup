@@ -31,6 +31,7 @@ app.use('/', routes);
 
 server.listen(PORT, () => console.log('listening on port ', PORT))
 
+//exports the instance of the socket connection object
 app.ioMiddleware = require('socket.io')(server);
 
-//testing github commit
+module.exports = app;
