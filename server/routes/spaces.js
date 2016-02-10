@@ -9,6 +9,7 @@ const secret = require('./../utilities');
 
 const router = express.Router();
 
+//manages a users information by space
 router.route('/')
   .get(auth.checkUser, (req, res) => {
     let _token = req.headers.token;

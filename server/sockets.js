@@ -1,3 +1,4 @@
+//stanged to connect to users hardware, not yet functional
 
 module.exports = function(io, email) {
 

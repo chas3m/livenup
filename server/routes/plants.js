@@ -5,6 +5,7 @@ const auth = require('./../auth');
 const plant = require('../../database/plants')
 const router = express.Router();
 
+//queries the database for plant information sent from inspirations
 router.route('/', auth.checkUser)
   .get((req, res) => {
     let _plants = req.query.plant;
@@ -12,17 +13,7 @@ router.route('/', auth.checkUser)
     plant.find(_plants, function(data){
       res.send(data);
     })
-  })
-  .post((req, res) => {
-    //calls database and saves a plant
-  })
-  .put((req, res) => {
-    let plant = req.body.plant;
-    //calls database and modifies a plant
-  })
-  .delete((req, res) => {
-    let plantName = req.body.plant.name;
-    //calls a database function that deletes the specified plant
   });
+
 
 module.exports = router;

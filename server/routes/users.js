@@ -7,6 +7,7 @@ const secret = require('./../utilities');
 const socket = require('./../sockets');
 const router = express.Router();
 
+//staged to connect to users hardware
 router.route('/')
   .get((req, res) => {
     //console.log('req.app.ioMiddleware in users: ', req.app.ioMiddleware);
@@ -19,18 +20,3 @@ router.route('/')
   })
 
 module.exports = router;
-
-
-// router.route('/')
-//   .post(auth.checkUser, (req, res) => {
-//     let userData = req.body.user;
-//     //calls database and saves user profile
-//   })
-//   .put((req, res) => {
-//     let userData = req.body.user.params;
-//     //calls database and modifies a user profile;
-//   })
-//   .delete((req, res) => {
-//     let userName = req.body.user.username;
-//     //calls a database function that deletes the specified user
-//   });

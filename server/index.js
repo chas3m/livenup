@@ -9,7 +9,6 @@ const testFunc = require('./sockets');
 
 
 mongoose.connect('mongodb://chuck:1qaz2wsx3edc4rfv@ds051595.mongolab.com:51595/heroku_d6g9mbk4');
-//console.log(mongoose.connection.readyState);
 
 const app = express();
 const server = http.createServer(app);
@@ -33,6 +32,7 @@ app.use('/', routes);
 
 server.listen(PORT, () => console.log('listening on port ', PORT))
 
+//exports the instance of the socket connection object
 app.ioMiddleware = require('socket.io')(server);
 
-//testing github commit
+module.exports = app;
